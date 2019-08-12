@@ -12,12 +12,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.kdrysun.smstotelegram.database.SmsDatabase;
-import com.kdrysun.smstotelegram.domain.Card;
-import com.kdrysun.smstotelegram.domain.CardType;
 import com.kdrysun.smstotelegram.fragment.CardFragment;
 import com.kdrysun.smstotelegram.fragment.SettlementFragment;
 import com.kdrysun.smstotelegram.fragment.SmsFragment;
-import com.kdrysun.smstotelegram.fragment.TokenFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
     private SmsFragment smsFragment = new SmsFragment();
     private SettlementFragment settlementFragment = new SettlementFragment();
     private CardFragment cardFragment = new CardFragment();
-    private TokenFragment tokenFragment = new TokenFragment();
 
     public static SmsDatabase smsDatabase;
 
@@ -47,9 +43,6 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.navigation_card:
                     transaction.replace(R.id.smsFrame, cardFragment).commitAllowingStateLoss();
                     break;
-                case R.id.navigation_token:
-                    transaction.replace(R.id.smsFrame, tokenFragment).commitAllowingStateLoss();
-                    break;
             }
             return false;
         }
@@ -67,10 +60,6 @@ public class MainActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         this.smsPermissionCheck();
-
-        new Thread(() -> {
-            this.setDefaultPhoneNumber();
-        }).start();
     }
 
     private void smsPermissionCheck() {
@@ -78,21 +67,5 @@ public class MainActivity extends AppCompatActivity {
 
         if (permissonCheck != PackageManager.PERMISSION_GRANTED)
             ActivityCompat.requestPermissions(this, new String[]{ Manifest.permission.RECEIVE_SMS}, 1);
-    }
-
-    private void setDefaultPhoneNumber() {
-        SmsDatabase db = SmsDatabase.getInstance(getApplicationContext());
-
-        if (db.cardDao().findCardType("15881688") == null)
-            db.cardDao().insertAll(new Card("15881688", CardType.KBCARD)); // 승인
-
-        if (db.cardDao().findCardType("18990800") == null)
-            db.cardDao().insertAll(new Card("18990800", CardType.KBCARD)); // 결제
-
-        if (db.cardDao().findCardType("15447200") == null)
-            db.cardDao().insertAll(new Card("15447200", CardType.SHINHAN)); // 승인
-
-        if (db.cardDao().findCardType("15447000") == null)
-            db.cardDao().insertAll(new Card("15447000", CardType.SHINHAN)); // 결제
     }
 }

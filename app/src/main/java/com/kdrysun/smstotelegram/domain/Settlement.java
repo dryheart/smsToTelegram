@@ -10,6 +10,12 @@ import lombok.Data;
 @Data
 public class Settlement {
 
+    public Settlement(String date, Long price, PaymentType type) {
+        this.date = date;
+        this.price = price;
+        this.type = type;
+    }
+
     @PrimaryKey(autoGenerate = true)
     private int seq;
 
@@ -20,7 +26,7 @@ public class Settlement {
     private Long price;
 
     @ColumnInfo
-    private CardType type;
+    private PaymentType type;
 
     @Override
     public String toString() {

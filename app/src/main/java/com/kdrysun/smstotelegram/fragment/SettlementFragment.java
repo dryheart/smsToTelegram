@@ -6,12 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.kdrysun.smstotelegram.R;
 import com.kdrysun.smstotelegram.database.SmsDatabase;
 import com.kdrysun.smstotelegram.domain.Settlement;
@@ -19,7 +19,7 @@ import com.kdrysun.smstotelegram.domain.Settlement;
 public class SettlementFragment extends Fragment {
 
     private ListView settlementListView;
-    private Button addButton;
+    private FloatingActionButton addButton;
     private ArrayAdapter adapter;
 
     @Nullable
@@ -30,13 +30,12 @@ public class SettlementFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        Context context = getActivity().getApplicationContext();
-
-        settlementListView = getActivity().findViewById(R.id.cardList);
-        adapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1);
+        settlementListView = getActivity().findViewById(R.id.settlementList);
 
         new Thread(() -> {
+            Context context = getActivity().getApplicationContext();
             SmsDatabase db = SmsDatabase.getInstance(context);
+            adapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1) ;
             adapter.addAll(db.settlementDao().getAll());
 
             settlementListView.setAdapter(adapter);
@@ -46,14 +45,13 @@ public class SettlementFragment extends Fragment {
 
             Settlement settlement = (Settlement) adapter.getItem(position);
 
-            Toast.makeText(context, settlement.toString(), Toast.LENGTH_SHORT).show();
-
+            Toast.makeText(getActivity().getApplicationContext(), settlement.toString(), Toast.LENGTH_SHORT).show();
 
             //adapter.notifyDataSetChanged();
             return true;
         });
 
-
+/*
         addButton = getActivity().findViewById(R.id.settlementAddButton);
         addButton.setOnClickListener(v -> {
 
@@ -65,8 +63,7 @@ public class SettlementFragment extends Fragment {
 
             // TODO 갱신
             adapter.notifyDataSetChanged();
-
-
         });
+*/
     }
 }

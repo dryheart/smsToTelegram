@@ -9,7 +9,7 @@ import lombok.Data;
 @Entity
 @Data
 public class Card {
-    public Card(String phoneNumber, CardType type) {
+    public Card(String phoneNumber, PaymentType type) {
         this.phoneNumber = phoneNumber;
         this.type = type;
     }
@@ -19,5 +19,5 @@ public class Card {
     private String phoneNumber;
 
     @ColumnInfo
-    private CardType type;
+    private PaymentType type;
 }
