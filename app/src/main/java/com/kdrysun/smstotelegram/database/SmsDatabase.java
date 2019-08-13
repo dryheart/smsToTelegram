@@ -14,10 +14,10 @@ import com.kdrysun.smstotelegram.domain.PaymentType;
 import com.kdrysun.smstotelegram.domain.Settlement;
 import com.kdrysun.smstotelegram.domain.Sms;
 import com.kdrysun.smstotelegram.dao.SmsDao;
-import com.kdrysun.smstotelegram.domain.typeconverter.CardTypeConverter;
+import com.kdrysun.smstotelegram.domain.typeconverter.PaymentTypeConverter;
 
 @Database(entities = {Sms.class, Settlement.class, Card.class}, version = 1)
-@TypeConverters(CardTypeConverter.class)
+@TypeConverters(PaymentTypeConverter.class)
 public abstract class SmsDatabase extends RoomDatabase {
     public abstract SmsDao smsDao();
 
@@ -39,12 +39,17 @@ public abstract class SmsDatabase extends RoomDatabase {
                                 new Card("15881688", PaymentType.KBCARD),
                                 new Card("18990800", PaymentType.KBCARD),
                                 new Card("15447200", PaymentType.SHINHAN),
-                                new Card("15447000", PaymentType.SHINHAN)
+                                new Card("15447000", PaymentType.SHINHAN),
+                                new Card("15881500", PaymentType.CASH),
+                                new Card("15884477", PaymentType.CASH)
                         );
 
                         getInstance(context).settlementDao().insertAll(
                                 new Settlement("201907", 1510490L, PaymentType.KBCARD),
-                                new Settlement("201907", 723065L, PaymentType.SHINHAN)
+                                new Settlement("201907", 723065L, PaymentType.SHINHAN),
+                                new Settlement("201908", 315158L, PaymentType.KBCARD),
+                                new Settlement("201908", 410252L, PaymentType.SHINHAN),
+                                new Settlement("201908", 500000L, PaymentType.CASH)
                         );
                     }).start();
                 }

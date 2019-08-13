@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 public class Settlement {
 
-    public Settlement(String date, Long price, PaymentType type) {
+    public Settlement(String date, long price, PaymentType type) {
         this.date = date;
         this.price = price;
         this.type = type;
@@ -23,7 +23,7 @@ public class Settlement {
     private String date;
 
     @ColumnInfo
-    private Long price;
+    private long price;
 
     @ColumnInfo
     private PaymentType type;

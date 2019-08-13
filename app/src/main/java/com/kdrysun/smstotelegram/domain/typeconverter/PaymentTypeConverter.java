@@ -3,7 +3,7 @@ package com.kdrysun.smstotelegram.domain.typeconverter;
 import androidx.room.TypeConverter;
 import com.kdrysun.smstotelegram.domain.PaymentType;
 
-public class CardTypeConverter {
+public class PaymentTypeConverter {
 
     @TypeConverter
     public int fromCardType(PaymentType type) {

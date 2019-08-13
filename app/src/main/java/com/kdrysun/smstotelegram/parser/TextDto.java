@@ -1,4 +1,4 @@
-package com.kdrysun.smstotelegram.receiver;
+package com.kdrysun.smstotelegram.parser;
 
 import com.kdrysun.smstotelegram.domain.PaymentType;
 import lombok.Data;
@@ -20,7 +20,7 @@ public class TextDto {
     private String type;
 
     /** 사용금액 */
-    private Long price;
+    private long price;
 
     /** 결제 구분 */
     private String method;
@@ -32,7 +32,10 @@ public class TextDto {
     private String place;
 
     /** 누적 */
-    private Long accum;
+    private long accum;
+
+    /** 잔액 */
+    private long balance;
 
     /** 카드사별 누적금액 노출 */
     private Map<PaymentType, Long> accumPrice;
@@ -43,5 +46,18 @@ public class TextDto {
 
     public void setAccum(String accum) {
         this.accum = NumberUtils.toLong(StringUtils.replace(accum, ",", ""));
+    }
+
+    public void setBalance(String balance) {
+        this.balance = NumberUtils.toLong(StringUtils.replace(balance, ",", ""));
+    }
+
+    public boolean isAccum() {
+        return !"입금".equals(type) ||
+                !(PaymentType.CASH.equals(paymentType) && "카드금액".equals(place));
+    }
+
+    public boolean isAccumCalc() {
+        return this.isParsed && this.isAccum();
     }
 }

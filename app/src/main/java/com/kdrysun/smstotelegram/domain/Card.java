@@ -20,4 +20,9 @@ public class Card {
 
     @ColumnInfo
     private PaymentType type;
+
+    @Override
+    public String toString() {
+        return "[" + type.getName() + "] " + phoneNumber;
+    }
 }
