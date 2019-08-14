@@ -8,6 +8,7 @@ import android.telephony.SmsMessage;
 import android.util.Log;
 import com.kdrysun.smstotelegram.domain.Sms;
 import com.kdrysun.smstotelegram.parser.SmsParser;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
 
 import java.util.ArrayList;
@@ -27,11 +28,25 @@ public class SmsReceiver extends BroadcastReceiver {
 
             SmsMessage[] messagesFromIntent = Telephony.Sms.Intents.getMessagesFromIntent(intent);
 
+            String phoneNumber = "";
+            String msg = "";
             List<Sms> smsList = new ArrayList<>();
-            for (SmsMessage message : messagesFromIntent)
-                smsList.add(new Sms(message.getOriginatingAddress(),
-                        message.getMessageBody(),
-                        DateFormatUtils.format(new Date(), "yyyyMMddhhmmss")));
+
+            for (SmsMessage message : messagesFromIntent) {
+                if (StringUtils.isNotBlank(phoneNumber) &&
+                        !StringUtils.equals(phoneNumber, message.getOriginatingAddress())) {
+
+                    smsList.add(new Sms(phoneNumber, msg,
+                            DateFormatUtils.format(new Date(), "yyyyMMddhhmmss")));
+                    msg = "";
+                }
+
+                phoneNumber = message.getOriginatingAddress();
+                msg += message.getMessageBody();
+            }
+
+            smsList.add(new Sms(phoneNumber, msg,
+                    DateFormatUtils.format(new Date(), "yyyyMMddhhmmss")));
 
             new Thread(() -> new SmsParser().parse(context, smsList)).start();
         }

@@ -12,7 +12,6 @@ public class CashParser extends TextParser {
             ".*전북[\\S]*[\\s\\r\\n]*(.[^\\r\\n\\d,]*)([0-9,]+)원.*잔액([0-9,]+)원[\\s\\r\\n]*([\\d\\s/:]+)[\\s\\r\\n](.*)"
     };
 
-
     @Override
     public TextDto parse(String originalMessage) {
         dto = new TextDto();

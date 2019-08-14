@@ -56,8 +56,8 @@ public class TextDto {
     }
 
     private boolean isAccum() {
-        return !"입금".equals(type) ||
-                !(PaymentType.CASH.equals(paymentType) && "카드금액".equals(place));
+        return !("입금".equals(type) ||
+                (PaymentType.CASH.equals(paymentType) && "카드금액".equals(place)));
     }
 
     public boolean isAccumCalc() {

@@ -66,13 +66,15 @@ public class MainActivity extends AppCompatActivity {
 
         this.smsPermissionCheck();
 
-//        this.testSms();
+        //this.testSms();
     }
 
     private void testSms() {
         new Thread(() -> {
 
             List<Sms> smsList = Lists.newArrayList(
+
+                /*
                 // KB
                 new Sms("15881688", "[Web발신]\nKB국민카드4*4*승인\n김*선\n5,000원 일시불\n08/13 10:03\n(주)티몬\n누적1,823,148원", "20190813133000"),
                 new Sms("15881688", "[Web발신]\nKB국민카드4*4*승인\n김*선\n20,020원 08/12\nSK텔레콤-자동납부", "20190813133000"),
@@ -86,9 +88,11 @@ public class MainActivity extends AppCompatActivity {
 
                 // KDB
                 new Sms("15881500", "[Web발신]\n(KDB)020****3636709\n출금\n100,000원\n윤혜령\n잔액30,075,963원 07:32:29", "20190813133000"),
+                new Sms("15881500", "[Web발신]\n(KDB)020****3636709\n입금\n4,835,000원\n(주)이노라인\n잔액33,347,963원 16:07:35", "20190813133000"),
 
                 new Sms("15884477", "[Web발신]\n[전북]####946\n출금25,800원\n잔액1,115,316원\n12/24 13:39\n모> 신한신헌섭", "20190813133000"),
                 new Sms("15884477", "[Web발신]\n[전북]####946\n입금200,000원\n잔액1,147,346원\n01/02 19:37\n산업김두선", "20190813133000")
+                */
             );
 
             new SmsParser().parse(getApplicationContext(), smsList);
