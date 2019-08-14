@@ -27,6 +27,9 @@ public interface SettlementDao {
     @Delete
     void delete(Settlement settlement);
 
+    @Query("UPDATE settlement SET isPaid = :isPaid WHERE type = :type AND date = :date")
+    void updatePaidByDateAndCardType(PaymentType type, String date, boolean isPaid);
+
     @Query("UPDATE settlement SET price = :price WHERE type = :type AND date = :date")
-    void updateByDateAndCardType(long price, PaymentType type, String date);
+    void updatePriceByDateAndCardType(long price, PaymentType type, String date);
 }

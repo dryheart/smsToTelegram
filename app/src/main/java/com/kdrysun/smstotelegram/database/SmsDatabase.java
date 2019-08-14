@@ -47,7 +47,7 @@ public abstract class SmsDatabase extends RoomDatabase {
                         getInstance(context).settlementDao().insertAll(
                                 new Settlement("201907", 1510490L, PaymentType.KBCARD),
                                 new Settlement("201907", 723065L, PaymentType.SHINHAN),
-                                new Settlement("201908", 315158L, PaymentType.KBCARD),
+                                new Settlement("201908", 343658L, PaymentType.KBCARD),
                                 new Settlement("201908", 410252L, PaymentType.SHINHAN),
                                 new Settlement("201908", 500000L, PaymentType.CASH)
                         );

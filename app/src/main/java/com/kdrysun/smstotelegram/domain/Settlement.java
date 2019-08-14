@@ -28,10 +28,13 @@ public class Settlement {
     @ColumnInfo
     private PaymentType type;
 
+    @ColumnInfo
+    private boolean isPaid = false;
+
     @Override
     public String toString() {
         return "결제월:" + date +
                 ", [카드사:" + type + "]" +
-                ", 금액: " + NumberFormat.getInstance().format(price) + "원";
+                ", 금액: " + NumberFormat.getInstance().format(price) + "원 " + (isPaid ? "결제완료" : "미결제");
     }
 }

@@ -13,6 +13,9 @@ public class TextDto {
     /** 처리 여부 */
     private boolean isParsed;
 
+    /** 결제금액 여부 */
+    private boolean isPaid;
+
     /** 카드 구분 */
     private PaymentType paymentType;
 
@@ -52,12 +55,12 @@ public class TextDto {
         this.balance = NumberUtils.toLong(StringUtils.replace(balance, ",", ""));
     }
 
-    public boolean isAccum() {
+    private boolean isAccum() {
         return !"입금".equals(type) ||
                 !(PaymentType.CASH.equals(paymentType) && "카드금액".equals(place));
     }
 
     public boolean isAccumCalc() {
-        return this.isParsed && this.isAccum();
+        return this.isParsed && this.isAccum() && !isPaid;
     }
 }

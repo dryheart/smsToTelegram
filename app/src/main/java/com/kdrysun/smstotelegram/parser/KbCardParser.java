@@ -9,7 +9,8 @@ public class KbCardParser extends TextParser {
 
     private String[] kbPattern = {
             ".*(승인|취소)[\\s\\r\\n]*\\S+[\\s\\r\\n]*([0-9,]+)원[\\s\\r\\n(]+(\\S[^\\s\\r\\n)]+).[^\\d]*(\\d+.*:\\d+)[\\s\\r\\n]*(.+)[\\s\\r\\n]+누적([0-9,]+)원",
-            ".*(승인|취소)[\\s\\r\\n]*\\S+[\\s\\r\\n]*([0-9,]+)원[\\s\\r\\n(]+(\\S[^\\s\\r\\n)]*)[\\s\\r\\n]*(.+)"
+            ".*(승인|취소)[\\s\\r\\n]*\\S+[\\s\\r\\n]*([0-9,]+)원[\\s\\r\\n(]+(\\S[^\\s\\r\\n)]*)[\\s\\r\\n]*(.+)",
+            ".[^\\d]*([\\d/]+)[\\s\\r\\n]*결제금액[\\s\\r\\n]+([\\d,]+)원.*"
     };
 
     @Override
@@ -24,10 +25,10 @@ public class KbCardParser extends TextParser {
 
                 if (matcher.matches()) {
                     dto.setParsed(true);
-                    dto.setType(matcher.group(1));
-                    dto.setPrice(matcher.group(2));
                     switch (i) {
                         case 0:
+                            dto.setType(matcher.group(1));
+                            dto.setPrice(matcher.group(2));
                             dto.setMethod(matcher.group(3));
                             dto.setTime(matcher.group(4));
                             dto.setPlace(matcher.group(5));
@@ -35,8 +36,17 @@ public class KbCardParser extends TextParser {
                             break;
 
                         case 1:
+                            dto.setType(matcher.group(1));
+                            dto.setPrice(matcher.group(2));
                             dto.setTime(matcher.group(3));
                             dto.setPlace(matcher.group(4));
+                            break;
+
+                        case 2:
+                            dto.setTime(matcher.group(1));
+                            dto.setPrice(matcher.group(2));
+                            dto.setPlace("결제금액");
+                            dto.setPaid(true);
                             break;
                     }
                     break;

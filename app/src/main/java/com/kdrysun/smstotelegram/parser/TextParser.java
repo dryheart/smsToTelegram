@@ -46,9 +46,11 @@ public abstract class TextParser {
     public String format(TextDto dto) {
         if (dto.isParsed()) {
             return new StringBuilder().append("[" + dto.getPaymentType().getName() + "]").
-                    append(" ").append(StringUtils.defaultString(dto.getMethod())).append(" ").append(dto.getType()).
+                    append(" ").append(StringUtils.defaultString(dto.getMethod())).
+                    append(" ").append(StringUtils.defaultString(dto.getType())).
                     append(" ").append(NumberFormat.getInstance().format(dto.getPrice()) + "원\n").
-                    append(StringUtils.defaultString(dto.getTime())).append(" ").append(dto.getPlace()).toString();
+                    append(StringUtils.defaultString(dto.getTime())).
+                    append(" ").append(StringUtils.defaultString(dto.getPlace())).toString();
         } else {
             return dto.getPlace();
         }
@@ -67,11 +69,6 @@ public abstract class TextParser {
      * @return 포맷팅된 문자
      */
     public String formatAccum(String currentMonth, List<Settlement> settlements) {
-        String telegramMsg = this.format(dto);
-
-        if (!dto.isAccumCalc())
-            return telegramMsg;
-
         StringBuilder str = new StringBuilder();
 
         if (settlements == null || settlements.size() == 0)
@@ -89,6 +86,6 @@ public abstract class TextParser {
         }
         str.append("\n총합: ").append(NumberFormat.getInstance().format(total)).append("원");
 
-        return telegramMsg += str.toString();
+        return str.toString();
     }
 }
