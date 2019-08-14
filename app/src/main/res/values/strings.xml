@@ -2,6 +2,6 @@
     <string name="app_name">SmsToTelegram</string>
     <string name="title_sms">발신문자</string>
     <string name="title_settlement">월결제</string>
-    <string name="title_token">토큰</string>
+    <string name="title_phone">수집번호</string>
     <string name="title_card">카드번호</string>
 </resources>
