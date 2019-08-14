@@ -1,6 +1,5 @@
 package com.kdrysun.smstotelegram.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,17 +31,11 @@ public class SettlementFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         settlementListView = getActivity().findViewById(R.id.settlementList);
 
-        new Thread(() -> {
-            Context context = getActivity().getApplicationContext();
-            SmsDatabase db = SmsDatabase.getInstance(context);
-            adapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1) ;
-            adapter.addAll(db.settlementDao().getAll());
-
-            settlementListView.setAdapter(adapter);
-        }).start();
+        adapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1);
+        adapter.notifyDataSetChanged();
+        settlementListView.setAdapter(adapter);
 
         settlementListView.setOnItemLongClickListener((parent, view1, position, id) -> {
-
             Settlement settlement = (Settlement) adapter.getItem(position);
 
             Toast.makeText(getActivity().getApplicationContext(), settlement.toString(), Toast.LENGTH_SHORT).show();
@@ -65,5 +58,15 @@ public class SettlementFragment extends Fragment {
             adapter.notifyDataSetChanged();
         });
 */
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        SmsDatabase db = SmsDatabase.getInstance(getContext());
+        new Thread(() -> {
+            adapter.addAll(db.settlementDao().getAll());
+        }).start();
     }
 }

@@ -1,6 +1,5 @@
 package com.kdrysun.smstotelegram.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +15,7 @@ import com.kdrysun.smstotelegram.database.SmsDatabase;
 public class CardFragment extends Fragment {
 
     private ListView cardListView;
+    private ArrayAdapter adapter;
 
     @Nullable
     @Override
@@ -27,13 +27,18 @@ public class CardFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         cardListView = getActivity().findViewById(R.id.cardList);
 
-        new Thread(() -> {
-            Context context = getActivity().getApplicationContext();
-            SmsDatabase db = SmsDatabase.getInstance(context);
-            ArrayAdapter adapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1) ;
-            adapter.addAll(db.cardDao().getAll());
+        adapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1) ;
+        adapter.notifyDataSetChanged();
+        cardListView.setAdapter(adapter);
+    }
 
-            cardListView.setAdapter(adapter);
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        SmsDatabase db = SmsDatabase.getInstance(getContext());
+        new Thread(() -> {
+            adapter.addAll(db.cardDao().getAll());
         }).start();
     }
 }
