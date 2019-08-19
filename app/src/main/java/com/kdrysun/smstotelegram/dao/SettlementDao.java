@@ -4,6 +4,7 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 import com.kdrysun.smstotelegram.domain.PaymentType;
 import com.kdrysun.smstotelegram.domain.Settlement;
 
@@ -23,6 +24,9 @@ public interface SettlementDao {
 
     @Insert
     void insertAll(Settlement... settlements);
+
+    @Update
+    void update(Settlement settlement);
 
     @Delete
     void delete(Settlement settlement);

@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.kdrysun.smstotelegram.R;
 import com.kdrysun.smstotelegram.database.SmsDatabase;
+import com.kdrysun.smstotelegram.dialog.SettlementDialog;
 import com.kdrysun.smstotelegram.domain.Settlement;
 
 public class SettlementFragment extends Fragment {
@@ -37,8 +38,8 @@ public class SettlementFragment extends Fragment {
 
         settlementListView.setOnItemLongClickListener((parent, view1, position, id) -> {
             Settlement settlement = (Settlement) adapter.getItem(position);
-
-            Toast.makeText(getActivity().getApplicationContext(), settlement.toString(), Toast.LENGTH_SHORT).show();
+            SettlementDialog settlementDialog = new SettlementDialog(getContext(), settlement);
+            settlementDialog.show();
 
             //adapter.notifyDataSetChanged();
             return true;

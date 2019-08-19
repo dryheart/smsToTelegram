@@ -18,4 +18,13 @@ public class PaymentTypeConverter {
 
         return PaymentType.NONE;
     }
+
+    @TypeConverter
+    public PaymentType toCardType(String name) {
+        for (PaymentType type : PaymentType.values())
+            if (type.getName().equals(name))
+                return type;
+
+        return PaymentType.NONE;
+    }
 }
