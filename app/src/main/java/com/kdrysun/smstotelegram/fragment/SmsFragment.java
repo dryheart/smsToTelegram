@@ -8,9 +8,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import com.kdrysun.smstotelegram.R;
 import com.kdrysun.smstotelegram.database.SmsDatabase;
+import com.kdrysun.smstotelegram.domain.Sms;
+import com.kdrysun.smstotelegram.receiver.Telegram;
 
 public class SmsFragment extends Fragment {
 
@@ -30,6 +33,22 @@ public class SmsFragment extends Fragment {
         adapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1) ;
         adapter.notifyDataSetChanged();
         smsListView.setAdapter(adapter);
+
+        smsListView.setOnItemLongClickListener((parent, view1, position, id) -> {
+
+            Sms sms = (Sms) adapter.getItem(position);
+
+            new AlertDialog.Builder(getContext()).setTitle("재발송").
+                    setMessage("재발송 하시겠습니까?").setCancelable(false).
+                    setPositiveButton("확인", (dialog, which) -> {
+                        new Telegram().send(sms.getMessage());
+                    }).
+                    setNegativeButton("취소", (dialog, which) -> {
+                        dialog.dismiss();
+                    }).show();
+
+            return true;
+        });
     }
 
     @Override
