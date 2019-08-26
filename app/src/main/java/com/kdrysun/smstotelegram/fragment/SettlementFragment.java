@@ -16,6 +16,8 @@ import com.kdrysun.smstotelegram.database.SmsDatabase;
 import com.kdrysun.smstotelegram.dialog.SettlementDialog;
 import com.kdrysun.smstotelegram.domain.Settlement;
 
+import java.util.List;
+
 public class SettlementFragment extends Fragment {
 
     private ListView settlementListView;
@@ -65,9 +67,10 @@ public class SettlementFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        SmsDatabase db = SmsDatabase.getInstance(getContext());
         new Thread(() -> {
-            adapter.addAll(db.settlementDao().getAll());
+            SmsDatabase db = SmsDatabase.getInstance(getContext());
+            List<Settlement> settlements = db.settlementDao().getAll();
+            getActivity().runOnUiThread(() -> adapter.addAll(settlements));
         }).start();
     }
 }

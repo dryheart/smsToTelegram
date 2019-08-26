@@ -15,6 +15,8 @@ import com.kdrysun.smstotelegram.database.SmsDatabase;
 import com.kdrysun.smstotelegram.domain.Sms;
 import com.kdrysun.smstotelegram.receiver.Telegram;
 
+import java.util.List;
+
 public class SmsFragment extends Fragment {
 
     private ListView smsListView;
@@ -55,9 +57,10 @@ public class SmsFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        SmsDatabase db = SmsDatabase.getInstance(getContext());
         new Thread(() -> {
-            adapter.addAll(db.smsDao().getAll());
+            SmsDatabase db = SmsDatabase.getInstance(getContext());
+            List<Sms> smsList = db.smsDao().getAll();
+            getActivity().runOnUiThread(() -> adapter.addAll(smsList));
         }).start();
     }
 }

@@ -80,8 +80,8 @@ public class SettlementDialog extends Dialog {
 
                         Toast.makeText(getContext(), settlement.getSeq() + ":" + settlement.toString(), Toast.LENGTH_SHORT).show();
 
-                        SmsDatabase db = SmsDatabase.getInstance(getContext());
                         new Thread(() -> {
+                            SmsDatabase db = SmsDatabase.getInstance(getContext());
                             db.settlementDao().delete(settlement);
                         }).start();
 
@@ -122,8 +122,8 @@ public class SettlementDialog extends Dialog {
 
             Toast.makeText(getContext(), settlement.getSeq() + ":" + settlement.toString(), Toast.LENGTH_SHORT).show();
 
-            SmsDatabase db = SmsDatabase.getInstance(getContext());
             new Thread(() -> {
+                SmsDatabase db = SmsDatabase.getInstance(getContext());
                 db.settlementDao().update(settlement);
             }).start();
 

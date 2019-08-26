@@ -11,6 +11,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import com.kdrysun.smstotelegram.R;
 import com.kdrysun.smstotelegram.database.SmsDatabase;
+import com.kdrysun.smstotelegram.domain.Card;
+
+import java.util.List;
 
 public class CardFragment extends Fragment {
 
@@ -36,9 +39,10 @@ public class CardFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        SmsDatabase db = SmsDatabase.getInstance(getContext());
         new Thread(() -> {
-            adapter.addAll(db.cardDao().getAll());
+            SmsDatabase db = SmsDatabase.getInstance(getContext());
+            List<Card> cards = db.cardDao().getAll();
+            getActivity().runOnUiThread(() -> adapter.addAll(cards));
         }).start();
     }
 }
