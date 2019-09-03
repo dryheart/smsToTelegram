@@ -35,11 +35,18 @@ public class SmsParser {
 
                     Log.d("SmsParser", telegramMsg);
 
-                    if (dto.isPaid())
-                        db.settlementDao().insertAll(new Settlement(
-                                DateFormatUtils.format(DateUtils.addMonths(new Date(), -1), "yyyyMM"),  // TODO 우선 이전달로 처리
-                                dto.getPrice(),
-                                dto.getPaymentType()));
+                    if (dto.isPaid()) {
+                        String prevMonth = DateFormatUtils.format(DateUtils.addMonths(new Date(), -1), "yyyyMM");
+                        Settlement prevSettle = db.settlementDao().findSettlementByDateAndCardType(dto.getPaymentType(), prevMonth);
+
+                        if (prevSettle == null)
+                            db.settlementDao().insertAll(new Settlement(
+                                    prevMonth,
+                                    dto.getPrice(),
+                                    dto.getPaymentType()));
+                        else
+                            db.settlementDao().updatePriceByDateAndCardType(dto.getPrice(), dto.getPaymentType(), prevMonth);
+                    }
 
                     if (dto.isAccumCalc()) {
                         AccumulatePrice.calculate(db, dto);
