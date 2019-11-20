@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" android:iconSpaceReserved="false">
+
+    <PreferenceCategory android:title="설정">
+        <SwitchPreference
+            android:key="isSendTelegram"
+            android:title="텔레그램 자동 전송"
+            android:defaultValue="true"
+            android:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="백업/복원">
+        <Preference
+            android:key="databaseBackup"
+            android:title="백업"
+            android:summary="DB를 백업합니다." />
+
+        <Preference
+            android:key="databaseRestore"
+            android:title="복원"
+            android:summary="DB를 복원합니다."/>
+    </PreferenceCategory>
+
+</PreferenceScreen>

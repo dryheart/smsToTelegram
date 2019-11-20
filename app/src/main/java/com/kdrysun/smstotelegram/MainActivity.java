@@ -3,6 +3,7 @@ package com.kdrysun.smstotelegram;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +16,7 @@ import com.google.common.collect.Lists;
 import com.kdrysun.smstotelegram.database.SmsDatabase;
 import com.kdrysun.smstotelegram.domain.Sms;
 import com.kdrysun.smstotelegram.fragment.CardFragment;
+import com.kdrysun.smstotelegram.fragment.SettingFragment;
 import com.kdrysun.smstotelegram.fragment.SettlementFragment;
 import com.kdrysun.smstotelegram.fragment.SmsFragment;
 import com.kdrysun.smstotelegram.parser.SmsParser;
@@ -27,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private SmsFragment smsFragment = new SmsFragment();
     private SettlementFragment settlementFragment = new SettlementFragment();
     private CardFragment cardFragment = new CardFragment();
+    private SettingFragment settingFragment = new SettingFragment();
 
     public static SmsDatabase smsDatabase;
 
@@ -67,6 +70,26 @@ public class MainActivity extends AppCompatActivity {
         this.smsPermissionCheck();
 
         //this.testSms();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.appbar, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.setting:
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.smsFrame, settingFragment)
+                        .commit();
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void testSms() {

@@ -70,7 +70,10 @@ public class SettlementFragment extends Fragment {
         new Thread(() -> {
             SmsDatabase db = SmsDatabase.getInstance(getContext());
             List<Settlement> settlements = db.settlementDao().getAll();
-            getActivity().runOnUiThread(() -> adapter.addAll(settlements));
+            getActivity().runOnUiThread(() -> {
+                adapter.clear();
+                adapter.addAll(settlements);
+            });
         }).start();
     }
 }

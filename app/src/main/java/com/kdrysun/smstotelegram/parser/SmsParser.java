@@ -1,13 +1,15 @@
 package com.kdrysun.smstotelegram.parser;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
-import androidx.room.Room;
+import androidx.preference.PreferenceManager;
 import com.kdrysun.smstotelegram.database.AccumulatePrice;
 import com.kdrysun.smstotelegram.database.SmsDatabase;
 import com.kdrysun.smstotelegram.domain.PaymentType;
 import com.kdrysun.smstotelegram.domain.Settlement;
 import com.kdrysun.smstotelegram.domain.Sms;
+import com.kdrysun.smstotelegram.fragment.SettingFragment;
 import com.kdrysun.smstotelegram.receiver.Telegram;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.commons.lang3.time.DateUtils;
@@ -18,7 +20,7 @@ import java.util.List;
 public class SmsParser {
 
     public void parse(Context context, List<Sms> smsList) {
-        SmsDatabase db = Room.databaseBuilder(context, SmsDatabase.class, "sms.db").build();
+        SmsDatabase db = SmsDatabase.getInstance(context);
 
         try {
             for (Sms sms : smsList) {
@@ -60,8 +62,16 @@ public class SmsParser {
                     sms.setMessage(telegramMsg);
                     db.smsDao().insertAll(smsList.stream().toArray(Sms[]::new));
 
+                    // 설정에서 자동 발송 on 일 경우만 발송
+                    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+                    boolean isSendTelegram = preferences.getBoolean("isSendTelegram", true);
+
                     // Telegram 전송
-                    new Telegram().send(telegramMsg);
+                    if (isSendTelegram)
+                        new Telegram().send(telegramMsg);
+
+                    // 자동 백업
+                    SettingFragment.autoDatabaseBackup(context);
                 } else {
                     Log.d("SmsParser", "not detect phone number" + sms.getNumber());
                 }

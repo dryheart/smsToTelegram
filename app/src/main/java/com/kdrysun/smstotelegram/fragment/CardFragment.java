@@ -42,7 +42,10 @@ public class CardFragment extends Fragment {
         new Thread(() -> {
             SmsDatabase db = SmsDatabase.getInstance(getContext());
             List<Card> cards = db.cardDao().getAll();
-            getActivity().runOnUiThread(() -> adapter.addAll(cards));
+            getActivity().runOnUiThread(() -> {
+                adapter.clear();
+                adapter.addAll(cards);
+            });
         }).start();
     }
 }

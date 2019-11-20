@@ -60,7 +60,10 @@ public class SmsFragment extends Fragment {
         new Thread(() -> {
             SmsDatabase db = SmsDatabase.getInstance(getContext());
             List<Sms> smsList = db.smsDao().getAll();
-            getActivity().runOnUiThread(() -> adapter.addAll(smsList));
+            getActivity().runOnUiThread(() -> {
+                adapter.clear();
+                adapter.addAll(smsList);
+            });
         }).start();
     }
 }

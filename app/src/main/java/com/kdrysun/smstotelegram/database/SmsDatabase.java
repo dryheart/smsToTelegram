@@ -58,4 +58,10 @@ public abstract class SmsDatabase extends RoomDatabase {
 
         return database;
     }
+
+    @Override
+    public void close() {
+        super.close();
+        SmsDatabase.database = null;
+    }
 }
