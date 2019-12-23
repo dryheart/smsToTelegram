@@ -14,6 +14,9 @@ public interface SmsDao {
     @Query("SELECT * FROM sms ORDER BY seq DESC")
     List<Sms> getAll();
 
+    @Query("SELECT * FROM sms ORDER BY seq DESC LIMIT 100")
+    List<Sms> getAll100();
+
     @Insert
     void insertAll(Sms... sms);
 

@@ -13,7 +13,7 @@ import java.util.List;
 @Dao
 public interface SettlementDao {
 
-    @Query("SELECT * FROM settlement")
+    @Query("SELECT * FROM settlement ORDER BY date DESC")
     List<Settlement> getAll();
 
     @Query("SELECT * FROM settlement WHERE type = :type AND date = :date")

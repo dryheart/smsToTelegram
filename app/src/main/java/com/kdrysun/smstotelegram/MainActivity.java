@@ -44,13 +44,13 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_sms:
                     transaction.replace(R.id.smsFrame, smsFragment).commitAllowingStateLoss();
-                    break;
+                    return true;
                 case R.id.navigation_settlement:
                     transaction.replace(R.id.smsFrame, settlementFragment).commitAllowingStateLoss();
-                    break;
+                    return true;
                 case R.id.navigation_card:
                     transaction.replace(R.id.smsFrame, cardFragment).commitAllowingStateLoss();
-                    break;
+                    return true;
             }
             return false;
         }

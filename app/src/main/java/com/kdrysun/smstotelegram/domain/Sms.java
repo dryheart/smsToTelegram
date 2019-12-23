@@ -4,6 +4,9 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import lombok.Data;
+import lombok.SneakyThrows;
+import org.apache.commons.lang3.time.DateFormatUtils;
+import org.apache.commons.lang3.time.DateUtils;
 
 @Entity
 @Data
@@ -25,4 +28,12 @@ public class Sms {
 
     @ColumnInfo
     private String date;
+
+    @SneakyThrows
+     @Override
+    public String toString() {
+        return "[" + DateFormatUtils.format(DateUtils.parseDate(date, "yyyyMMddHHmmss"), "yyyy-MM-dd HH:mm:ss") + "] " +
+                seq + " " + number + "\n" +
+                message;
+    }
 }

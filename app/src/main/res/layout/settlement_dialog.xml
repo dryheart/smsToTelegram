@@ -1,67 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:orientation="vertical">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView android:layout_width="match_parent" android:layout_height="53sp"
-            android:id="@+id/settlementPopupTitle" android:text="결제금액" android:textSize="20sp" android:gravity="center"
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="53sp"
+            android:id="@+id/settlementPopupTitle"
+            android:text="결제금액"
+            android:textSize="20sp"
+            android:gravity="center"
             android:background="@color/colorPrimary" />
 
-        <TableLayout android:layout_width="match_parent" android:layout_height="match_parent">
-            <TableRow>
-                <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                    android:id="@+id/settlementPopupPaymentType" android:text="결제수단" android:textSize="30sp"
-                    android:gravity="center" android:background="@color/colorAccent" />
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:stretchColumns="1">
 
-                <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                    android:id="@+id/settlementPopupPaymentTypeInput" android:textSize="30sp" android:gravity="left"
-                    android:background="@color/colorPrimary" />
+            <TableRow
+                android:background="@drawable/border">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/settlementPopupPaymentType"
+                    android:text="결제수단"
+                    android:textSize="20sp"
+                    android:gravity="center"
+                    android:padding="3dp"
+                    android:background="@color/colorAccent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/settlementPopupPaymentTypeInput"
+                    android:textSize="20sp"
+                    android:gravity="left"
+                    android:padding="3dp"
+                    android:background="@drawable/border"/>
             </TableRow>
-            <TableRow android:layout_height="wrap_content">
-                <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                    android:id="@+id/settlementPopupDate" android:text="날짜" android:textSize="30sp"
-                    android:gravity="center" android:background="@color/colorAccent" />
 
-                <EditText android:layout_width="match_parent" android:layout_height="33sp"
-                    android:id="@+id/settlementPopupDateInput" android:textSize="30sp" android:gravity="left"
-                    android:background="@color/colorPrimary" />
+            <TableRow android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/settlementPopupDate"
+                    android:text="날짜"
+                    android:textSize="20sp"
+                    android:gravity="center"
+                    android:padding="3dp"
+                    android:background="@color/colorAccent" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/settlementPopupDateInput"
+                    android:textSize="20sp"
+                    android:gravity="left"
+                    android:padding="3dp"
+                    android:background="@drawable/border"/>
             </TableRow>
-            <TableRow android:layout_height="wrap_content">
-                <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                    android:id="@+id/settlementPopupPrice" android:text="금액" android:textSize="30sp"
-                    android:gravity="center" android:background="@color/colorAccent" />
 
-                <EditText android:layout_width="match_parent" android:layout_height="33sp"
-                    android:id="@+id/settlementPopupPriceInput" android:textSize="30sp" android:gravity="left"
-                    android:background="@color/colorPrimary" />
+            <TableRow android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/settlementPopupPrice"
+                    android:text="금액"
+                    android:textSize="20sp"
+                    android:gravity="center"
+                    android:padding="3dp"
+                    android:background="@color/colorAccent" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/settlementPopupPriceInput"
+                    android:textSize="20sp"
+                    android:gravity="left"
+                    android:padding="3dp"
+                    android:background="@drawable/border"/>
             </TableRow>
-            <TableRow android:layout_height="wrap_content">
-                <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                    android:id="@+id/settlementPopupPaid" android:text="결제여부" android:textSize="30sp"
-                    android:gravity="center" android:background="@color/colorAccent" />
 
-                <TextView android:layout_width="match_parent" android:layout_height="33sp"
-                    android:id="@+id/settlementPopupPaidInput" android:textSize="30sp" android:gravity="left"
-                    android:background="@color/colorPrimary" />
+            <TableRow android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/settlementPopupPaid"
+                    android:text="결제여부"
+                    android:textSize="20sp"
+                    android:gravity="center"
+                    android:padding="3dp"
+                    android:background="@color/colorAccent" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/settlementPopupPaidInput"
+                    android:textSize="20sp"
+                    android:gravity="left"
+                    android:padding="3dp"
+                    android:background="@drawable/border"/>
             </TableRow>
         </TableLayout>
     </LinearLayout>
 
-    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:orientation="horizontal" android:gravity="bottom">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="bottom">
 
-        <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:id="@+id/settlementPopupCancelButton" android:text="취소" android:textSize="30sp"
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/settlementPopupCancelButton"
+            android:text="취소"
+            android:textSize="20sp"
             android:layout_weight="1" />
 
-        <Button android:layout_width="wrap_content" android:layout_height="match_parent"
-            android:id="@+id/settlementPopupDeleteButton" android:text="삭제" android:textSize="30sp"
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/settlementPopupDeleteButton"
+            android:text="삭제"
+            android:textSize="20sp"
             android:layout_weight="1" />
 
-        <Button android:layout_width="wrap_content" android:layout_height="match_parent"
-            android:id="@+id/settlementPopupUpdateButton" android:text="수정" android:textSize="30sp"
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/settlementPopupUpdateButton"
+            android:text="수정"
+            android:textSize="20sp"
             android:layout_weight="1" />
 
     </LinearLayout>
