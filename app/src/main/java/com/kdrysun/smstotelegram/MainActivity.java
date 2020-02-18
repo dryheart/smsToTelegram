@@ -132,13 +132,12 @@ public class MainActivity extends AppCompatActivity {
         };
 
         List<String> permission = new ArrayList<>();
-
         for (String p : checkPermission) {
             if (ContextCompat.checkSelfPermission(this, p) != PackageManager.PERMISSION_GRANTED)
                 permission.add(p);
         }
 
         if (permission.size() > 0)
-            ActivityCompat.requestPermissions(this, (String[]) permission.toArray(), 1);
+            ActivityCompat.requestPermissions(this, permission.toArray(new String[permission.size()]), 1);
     }
 }
