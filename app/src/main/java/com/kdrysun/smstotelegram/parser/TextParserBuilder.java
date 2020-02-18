@@ -13,6 +13,8 @@ public class TextParserBuilder {
                 return new ShinhanCardParser();
             case CASH:
                 return new CashParser();
+            case LOTTE:
+                return new LotteCardParser();
         }
 
         return new TextParser() {

@@ -14,6 +14,8 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.common.collect.Lists;
 import com.kdrysun.smstotelegram.database.SmsDatabase;
+import com.kdrysun.smstotelegram.domain.Card;
+import com.kdrysun.smstotelegram.domain.PaymentType;
 import com.kdrysun.smstotelegram.domain.Sms;
 import com.kdrysun.smstotelegram.fragment.CardFragment;
 import com.kdrysun.smstotelegram.fragment.SettingFragment;
@@ -69,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
         this.smsPermissionCheck();
 
-        //this.testSms();
+//        this.testSms();
     }
 
     @Override
@@ -95,7 +97,15 @@ public class MainActivity extends AppCompatActivity {
     private void testSms() {
         new Thread(() -> {
 
+            SmsDatabase db = smsDatabase.getInstance(getApplicationContext());
+            PaymentType cardType = db.cardDao().findCardType("15888100");
+            if (cardType == null)
+                db.cardDao().insertAll(new Card("15888100", PaymentType.LOTTE));
+
+
             List<Sms> smsList = Lists.newArrayList(
+
+                new Sms("15888100", "[Web발신]\n롯데8*8* 승인\n김*선\n13,900원 일시불\n02/17 20:28\n(주)티몬\n누적13,900원", "20200217213000")
 
                 /*
                 // KB
