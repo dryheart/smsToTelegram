@@ -30,7 +30,7 @@ public class Sms {
     private String date;
 
     @SneakyThrows
-     @Override
+    @Override
     public String toString() {
         return "[" + DateFormatUtils.format(DateUtils.parseDate(date, "yyyyMMddHHmmss"), "yyyy-MM-dd HH:mm:ss") + "] " +
                 seq + " " + number + "\n" +

@@ -10,20 +10,26 @@ import com.kdrysun.smstotelegram.domain.PaymentType;
 import com.kdrysun.smstotelegram.domain.Settlement;
 import com.kdrysun.smstotelegram.domain.Sms;
 import com.kdrysun.smstotelegram.fragment.SettingFragment;
+import com.kdrysun.smstotelegram.log.FileLogger;
 import com.kdrysun.smstotelegram.receiver.Telegram;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.commons.lang3.time.DateUtils;
 
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class SmsParser {
+    Logger fileLogger = FileLogger.getLogger(SmsParser.class);
 
     public void parse(Context context, List<Sms> smsList) {
         SmsDatabase db = SmsDatabase.getInstance(context);
 
         try {
             for (Sms sms : smsList) {
+                fileLogger.log(Level.INFO, sms.toString());
+
                 PaymentType paymentType = db.cardDao().findCardType(sms.getNumber());
                 if (paymentType != null) {
                     Log.d("SmsParser", "detect phone number" + sms.getNumber());
@@ -69,6 +75,8 @@ public class SmsParser {
                     // Telegram 전송
                     if (isSendTelegram)
                         new Telegram().send(telegramMsg);
+
+                    fileLogger.log(Level.INFO, dto.toString());
 
                     // 자동 백업
                     SettingFragment.autoDatabaseBackup(context);
