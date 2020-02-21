@@ -45,7 +45,7 @@ public class SmsReceiver extends BroadcastReceiver {
                 msg += message.getMessageBody();
             }
 
-            smsList.add(new Sms(phoneNumber, msg,
+            smsList.add(new Sms(phoneNumber, StringUtils.trimToEmpty(msg),
                     DateFormatUtils.format(new Date(), "yyyyMMddhhmmss")));
 
             new Thread(() -> new SmsParser().parse(context, smsList)).start();
