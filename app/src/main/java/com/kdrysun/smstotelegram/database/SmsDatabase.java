@@ -42,7 +42,8 @@ public abstract class SmsDatabase extends RoomDatabase {
                                 new Card("15447000", PaymentType.SHINHAN),
                                 new Card("15881500", PaymentType.CASH),
                                 new Card("15884477", PaymentType.CASH),
-                                new Card("15888100", PaymentType.LOTTE)
+                                new Card("15888100", PaymentType.LOTTE),
+                                new Card("18990030", PaymentType.HYUNDAI)
                         );
 
                         getInstance(context).settlementDao().insertAll(

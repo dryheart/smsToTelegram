@@ -85,7 +85,7 @@ public class SettingFragment extends PreferenceFragmentCompat {
         } else if (StringUtils.equals(preference.getKey(), "databaseRestore")) {
 
             // 복원
-            if (checkReadStoragePermission()) {
+            if (checkWriteStoragePermission()) {
 
                 // 파일 선택 팝업 호출
                 Intent i = new Intent(Intent.ACTION_OPEN_DOCUMENT);
@@ -109,11 +109,11 @@ public class SettingFragment extends PreferenceFragmentCompat {
     }
 
     private boolean checkWriteStoragePermission() {
-        int permissonCheck= ContextCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        int permissonCheck= ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_MEDIA_VIDEO);
         if (permissonCheck != PackageManager.PERMISSION_GRANTED)
-            ActivityCompat.requestPermissions(getActivity(), new String[]{ Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+            ActivityCompat.requestPermissions(getActivity(), new String[]{ Manifest.permission.READ_MEDIA_VIDEO}, 1);
 
-        return ContextCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        return ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_MEDIA_VIDEO)
                         == PackageManager.PERMISSION_GRANTED;
     }
 
@@ -125,7 +125,7 @@ public class SettingFragment extends PreferenceFragmentCompat {
             String dbPath = db.getOpenHelper().getWritableDatabase().getPath();
             File dbFile = new File(dbPath);
 
-            String backupFilePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath() + File.separator + "sms.db";
+            String backupFilePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).getPath() + File.separator + "sms.db";
             File backupFile = new File(backupFilePath);
             if (!backupFile.exists()) backupFile.createNewFile();
 

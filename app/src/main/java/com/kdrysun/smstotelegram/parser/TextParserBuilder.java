@@ -15,6 +15,8 @@ public class TextParserBuilder {
                 return new CashParser();
             case LOTTE:
                 return new LotteCardParser();
+            case HYUNDAI:
+                return new HyundaiCardParser();
         }
 
         return new TextParser() {

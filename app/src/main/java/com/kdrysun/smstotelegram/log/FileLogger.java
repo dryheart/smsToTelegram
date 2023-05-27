@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 
 public class FileLogger {
     private static FileHandler fileHandler;
-    private static String filePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath();
+    private static String filePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).getPath();
     private static final String LOG_FILE_NAME = "FileLog%g.txt";
     private static final int LOG_FILE_SIZE_LIMIT = 512*1024;
     private static final int LOG_FILE_MAX_COUNT = 1;

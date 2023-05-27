@@ -8,7 +8,8 @@ public enum PaymentType {
     SHINHAN(2, "신한카드"),
     CASH(3, "현금"),
     NONE(4, "없음"),
-    LOTTE(5, "롯데카드");
+    LOTTE(5, "롯데카드"),
+    HYUNDAI(6, "현대카드");
 
     PaymentType(int id, String name) {
         this.id = id;

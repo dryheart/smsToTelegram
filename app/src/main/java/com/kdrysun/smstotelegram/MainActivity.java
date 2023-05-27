@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
         this.smsPermissionCheck();
 
-//        this.testSms();
+        //this.testSms();
     }
 
     @Override
@@ -97,7 +97,10 @@ public class MainActivity extends AppCompatActivity {
         new Thread(() -> {
             List<Sms> smsList = Lists.newArrayList(
 
-                new Sms("15888100", "[Web발신]\n롯데8*8* 승인\n김*선\n13,900원 일시불\n02/17 20:28\n(주)티몬\n누적13,900원", "20200217213000")
+                //new Sms("15888100", "[Web발신]\n롯데8*8* 승인\n김*선\n13,900원 일시불\n02/17 20:28\n(주)티몬\n누적13,900원", "20200217213000")
+                new Sms("15888100", "[Web발신]\n쿠팡(쿠페이)\n190,020원 승인\n김*선 롯데1*3*\n일시불 04/07 08:53\n누적1,040,293원", "20230408165200")
+                //new Sms("15888100", "[Web발신]\n지에스(GS)25 운정\n3,000원 승인\n김*선 롯데1*3*\n일시불 04/08 21:25\n누적1,038,293원", "20230408215200")
+                //new Sms("18990030", "[Web발신]\n코스트코현대 승인\n김*선\n35,000원 일시불\n04/06 11:47\n아워홈LG디스풀레\n누적1,073,776원", "20230406114700")
 
                 /*
                 // KB
@@ -128,7 +131,11 @@ public class MainActivity extends AppCompatActivity {
         String[] checkPermission = new String[]{
                 Manifest.permission.RECEIVE_SMS,
                 Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_MEDIA_AUDIO,
+                Manifest.permission.READ_MEDIA_IMAGES,
+                Manifest.permission.READ_MEDIA_VIDEO,
+                Manifest.permission.MANAGE_EXTERNAL_STORAGE
         };
 
         List<String> permission = new ArrayList<>();
